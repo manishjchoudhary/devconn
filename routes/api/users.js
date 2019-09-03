@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const gravatar = require('gravatar');
-const User = require('../../models/Users');
 const bcrypt = require('bcryptjs');
+
+//Load user model
+const User = require('../../models/Users');
 
 // @route   GET /api/users/test
 // @desc    Tests users route
