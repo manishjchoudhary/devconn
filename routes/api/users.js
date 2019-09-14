@@ -8,6 +8,7 @@ const keys = require('../../config/keys');
 
 //Load Input Validation
 const validateRegisterInput = require('../../validation/registor');
+const validateLoginInput = require('../../validation/login');
 
 //Load user model
 const User = require('../../models/Users');
@@ -29,6 +30,7 @@ router.post('/register', (req, res) => {
     }
 
     User.findOne({ email: req.body.email }).then(user => {
+        //If user already exists
         if (user) {
             errors.email = 'Email already exists';
             res.status(400).json(errors);
@@ -64,6 +66,13 @@ router.post('/register', (req, res) => {
 // @desc    Login user
 // @access  Public
 router.post('/login', (req, res) => {
+    const { errors, isValid } = validateLoginInput(req.body);
+
+    //Check Validation
+    if (!isValid) {
+        return res.status(400).json(errors);
+    }
+
     const email = req.body.email;
     const password = req.body.password;
 
@@ -71,7 +80,8 @@ router.post('/login', (req, res) => {
     User.findOne({ email }).then(user => {
         //If not found
         if (!user) {
-            return res.status(404).json({ email: 'User not found' });
+            errors.email = 'User not found';
+            return res.status(404).json(errors);
         }
 
         //Compare password
@@ -97,7 +107,8 @@ router.post('/login', (req, res) => {
                     }
                 );
             } else {
-                return res.status(400).json({ password: 'Incorrect Password' });
+                errors.password = 'Incorrect Password';
+                return res.status(400).json(errors);
             }
         });
     });
