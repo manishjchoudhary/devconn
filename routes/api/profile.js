@@ -248,4 +248,67 @@ router.post(
     }
 );
 
+// @route   POST /api/profile/experience/:exp_id
+// @desc    Delete experience on the profile
+// @access  Private
+router.delete(
+    '/experience/:exp_id',
+    passport.authenticate('jwt', { session: false }),
+    (req, res) => {
+        Profile.findOne({ user: req.user.id })
+            .then(profile => {
+                //Get remove index
+                const removeIndex = profile.experience
+                    .map(item => item.id)
+                    .indexOf(req.params.exp_id);
+
+                //Splice out of the array
+                profile.experience.splice(removeIndex);
+
+                //save
+                profile.save().then(profile => res.json(profile));
+            })
+            .catch(err => res.status(404).json(err));
+    }
+);
+
+// @route   POST /api/profile/education/:edu_id
+// @desc    Delete education on the profile
+// @access  Private
+router.delete(
+    '/education/:edu_id',
+    passport.authenticate('jwt', { session: false }),
+    (req, res) => {
+        Profile.findOne({ user: req.user.id })
+            .then(profile => {
+                //Get remove index
+                const removeIndex = profile.education
+                    .map(item => item.id)
+                    .indexOf(req.params.edu_id);
+
+                //Splice out of the array
+                profile.education.splice(removeIndex);
+
+                //save
+                profile.save().then(profile => res.json(profile));
+            })
+            .catch(err => res.status(404).json(err));
+    }
+);
+
+// @route   POST /api/profile/
+// @desc    Delete user and profile
+// @access  Private
+router.delete(
+    '/',
+    passport.authenticate('jwt', { session: false }),
+    (req, res) => {
+        Profile.findOneAndRemove({ user: req.user.id }).then(profile => {
+            User.findOneAndRemove({ _id: req.user.id }).then(() =>
+                res.json({ msg: 'User Deleted' })
+            );
+        });
+    }
+);
+
 module.exports = router;
