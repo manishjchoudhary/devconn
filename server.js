@@ -33,6 +33,6 @@ app.use('/api/users', users);
 app.use('/api/profile', profile);
 app.use('/api/posts', posts);
 
-PORT = process.env.PORT || 5001;
+PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Server started at port ${PORT}`));
