@@ -1,11 +1,8 @@
-manish@gmail.com
-1234
+man@gmail.com
+asdfgh
 
-sourav@gmail.com
-12345
+john@gmail.com
+johndoe
 
-abhi@gmail.com
-1000
-
-anil@gmail.com
-123456
+madhu@gmail.com
+madhudidi
