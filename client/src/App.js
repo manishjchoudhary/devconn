@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import jwt_decode from 'jwt-decode'
 import { setCurrentUser, logoutUser } from './actions/authActions'
+import { clearCurrentProfile } from './actions/profileActions'
 import setAuthToken from './utils/setAuthToken'
 
 import { Provider } from 'react-redux';
@@ -32,7 +33,7 @@ if (localStorage.jwtToken) {
 		// Logout user
 		store.dispatch(logoutUser())
 		// Clear current profile
-
+		store.dispatch(clearCurrentProfile());
 		// Redirect to login 
 		window.location.href = '/login'
 	}
