@@ -17,7 +17,7 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Dashboard from './components/dashboard/Dashboard';
 import './App.css';
-import CreateProfile from './components/create-profile/CreateProfile';
+import CreateProfile from './components/profile/CreateProfile';
 
 // Check for token
 if (localStorage.jwtToken) {
