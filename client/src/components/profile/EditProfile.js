@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { withRouter } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import TextFieldGroup from '../common/TextFieldGroup'
 import TextAreaFieldGroup from '../common/TextAreaFieldGroup'
 import SelectListGroup from '../common/SelectListGroup'
 import InputGroup from '../common/InputGroup'
-import { createProfile } from '../../actions/profileActions'
+import { createProfile, getCurrentProfile } from '../../actions/profileActions'
 
-class CreateProfile extends Component {
+class EditProfile extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -139,10 +139,10 @@ class CreateProfile extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-8 m-auto">
-              <h1 className="display-4 text-center">Create Your Profile</h1>
-              <p className="lead text-center">
-                Let's get some information to make your profile stand out
-              </p>
+              <Link to='/dashboard' className="btn btn-light">
+                <i class="fas fa-arrow-alt-circle-left" /> Go Back
+              </Link>
+              <h1 className="display-4 text-center">Edit Profile</h1>
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>
                 <TextFieldGroup
@@ -236,8 +236,9 @@ class CreateProfile extends Component {
   }
 }
 
-CreateProfile.propTypes = {
+EditProfile.propTypes = {
   createProfile: PropTypes.func.isRequired,
+  getCurrentProfile: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired,
   errors: PropTypes.object.isRequired
 }
@@ -247,4 +248,4 @@ const mapStateToProps = (state) => ({
   errors: state.errors
 })
 
-export default connect(mapStateToProps, { createProfile })(withRouter(CreateProfile))
+export default connect(mapStateToProps, { createProfile, getCurrentProfile })(withRouter(EditProfile))
