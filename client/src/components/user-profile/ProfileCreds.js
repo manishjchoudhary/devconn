@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Moment from 'react-moment'
 
 class ProfileCreds extends Component {
@@ -44,20 +45,20 @@ class ProfileCreds extends Component {
     ))
 
     return (
-      <div class="row">
-        <div class="col-md-6">
-          <h3 class="text-center text-info">Experience</h3>
+      <div className="row">
+        <div className="col-md-6">
+          <h3 className="text-center text-info">Experience</h3>
           {expItem.length > 0 ? (
-            <ul class="list-group">{expItem}</ul>
+            <ul className="list-group">{expItem}</ul>
           ) : (
               <p className="text-center">No Experience Listed</p>
             )}
         </div>
 
-        <div class="col-md-6">
-          <h3 class="text-center text-info">Education</h3>
+        <div className="col-md-6">
+          <h3 className="text-center text-info">Education</h3>
           {eduItem.length > 0 ? (
-            <ul class="list-group">{eduItem}</ul>
+            <ul className="list-group">{eduItem}</ul>
           ) : (
               <p className="text-center">No Education Listed</p>
             )}
@@ -65,6 +66,11 @@ class ProfileCreds extends Component {
       </div>
     )
   }
+}
+
+ProfileCreds.propTypes = {
+  education: PropTypes.array.isRequired,
+  experience: PropTypes.array.isRequired
 }
 
 export default ProfileCreds
