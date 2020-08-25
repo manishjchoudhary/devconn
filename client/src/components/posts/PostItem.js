@@ -43,9 +43,9 @@ class PostItem extends Component {
               />
             </a>
             <br />
-            <p className="text-center">{post.name}</p>
           </div>
           <div className="col-md-10">
+            <h4 className="mb-2">{post.name}</h4>
             <p className="lead">
               {post.text}
             </p>
@@ -70,7 +70,11 @@ class PostItem extends Component {
                 </Link>
 
                 {post.user === auth.user.id ? (
-                  <button onClick={this.onDeleteClick.bind(this, post._id)} type="button" className="btn btn-danger mr-1" >
+                  <button
+                    onClick={this.onDeleteClick.bind(this, post._id)}
+                    type="button"
+                    className="btn btn-danger mr-1 float-right"
+                  >
                     <i className="fas fa-times" />
                   </button>
                 ) : null}

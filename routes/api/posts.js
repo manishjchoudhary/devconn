@@ -191,7 +191,7 @@ router.post(
                 post.comments.unshift(newComment);
 
                 //Save
-                post.save().then(post => res.json({ post }));
+                post.save().then(post => res.json(post));
             })
             .catch(err => res.status(404).json({ post: 'Post not found' }));
     }
