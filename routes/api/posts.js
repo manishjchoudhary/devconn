@@ -191,7 +191,7 @@ router.post(
                 post.comments.unshift(newComment);
 
                 //Save
-                post.save().then(post => res.json({ post }));
+                post.save().then(post => res.json(post));
             })
             .catch(err => res.status(404).json({ post: 'Post not found' }));
     }
@@ -220,14 +220,14 @@ router.delete(
 
                 //Get remove index
                 const removeIndex = post.comments
-                    .map(item => item.id.toString())
-                    .indexOf(req.param.comment_id);
+                    .map(comment => comment._id.toString())
+                    .indexOf(req.params.comment_id);
 
                 //Splice that comment
-                post.comments.splice(removeIndex);
+                post.comments.splice(removeIndex, 1);
 
                 //Save
-                post.save().then(post => res.json({ post }));
+                post.save().then(post => res.json(post));
             })
             .catch(err => res.status(404).json({ post: 'Post not found' }));
     }
